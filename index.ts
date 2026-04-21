@@ -772,6 +772,7 @@ export default function footerWessel(pi: ExtensionAPI) {
           overlayOptions: () => ({
             verticalAlign: "center",
             horizontalAlign: "center",
+            nonCapturing: true,
           }),
         },
       ).catch((error: unknown) => {
