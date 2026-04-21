@@ -1,0 +1,30 @@
+{
+  "name": "pi-powerline-footer-wessel",
+  "version": "0.1.0",
+  "description": "Slimmed-down powerline footer extension for pi coding agent",
+  "type": "module",
+  "files": [
+    "*.ts",
+    "*.md",
+    "*.json",
+    "tests/**/*.ts"
+  ],
+  "keywords": [
+    "pi-package",
+    "pi",
+    "coding-agent",
+    "powerline",
+    "status-bar",
+    "extension"
+  ],
+  "author": "Wessel",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --experimental-strip-types --test tests/**/*.test.ts"
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  }
+}
