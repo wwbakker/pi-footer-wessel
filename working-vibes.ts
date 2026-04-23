@@ -14,7 +14,7 @@ type VibeMode = "generate" | "file";
 // Constants
 // ═══════════════════════════════════════════════════════════════════════════
 
-const DEFAULT_MODEL = "openai-codex/gpt-5.4-mini";
+const DEFAULT_MODEL = "github-copilot/gpt-5.4-mini";
 
 const DEFAULT_PROMPT = `Generate a 2-4 word "{theme}" themed loading message ending in "...".
 
