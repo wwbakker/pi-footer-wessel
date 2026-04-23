@@ -20,7 +20,7 @@
   "author": "Wessel",
   "license": "MIT",
   "scripts": {
-    "test": "node --experimental-strip-types --test tests/**/*.test.ts"
+    "test": "node --experimental-strip-types --test --test-concurrency=1 tests/**/*.test.ts"
   },
   "pi": {
     "extensions": [

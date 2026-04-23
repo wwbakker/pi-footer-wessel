@@ -18,6 +18,7 @@ import { getGitStatus, invalidateGitBranch, invalidateGitStatus } from "./git-st
 import { ansi, getFgAnsiCode } from "./colors.js";
 import { WelcomeComponent, WelcomeHeader, discoverLoadedCounts, getRecentSessions } from "./welcome.js";
 import { getDefaultColors } from "./theme.js";
+import { readActiveAuthProfile } from "./auth-profile.js";
 import {
   generateVibesBatch,
   getVibeFileCount,
@@ -382,6 +383,7 @@ export default function footerWessel(pi: ExtensionAPI) {
   let lastUserPrompt = "";
   let showLastPrompt = true;
   let currentEditor: EditorWithHistory | null = null;
+  let activeAuthProfileName: string | null = null;
 
   let lastLayoutWidth = 0;
   let lastLayoutResult: { topContent: string; secondaryContent: string } | null = null;
@@ -391,6 +393,18 @@ export default function footerWessel(pi: ExtensionAPI) {
     lastLayoutResult = null;
     tuiRef?.requestRender();
   };
+
+  pi.events.on("auth-profile:changed", (data: unknown) => {
+    if (!isRecord(data)) {
+      return;
+    }
+
+    const profileName = data.name;
+    activeAuthProfileName = typeof profileName === "string" && profileName.trim().length > 0
+      ? profileName.trim()
+      : null;
+    requestRender();
+  });
 
   function getRecentAgentContext(ctx: any): string | undefined {
     const sessionEvents = ctx.sessionManager?.getBranch?.() ?? [];
@@ -488,6 +502,7 @@ export default function footerWessel(pi: ExtensionAPI) {
       model: ctx.model,
       thinkingLevel,
       sessionId: ctx.sessionManager?.getSessionId?.(),
+      authProfileName: activeAuthProfileName,
       usageStats: { input, output, cacheRead, cacheWrite, cost },
       contextPercent,
       contextWindow,
@@ -791,6 +806,7 @@ export default function footerWessel(pi: ExtensionAPI) {
     const settings = readSettings();
     showLastPrompt = settings.showLastPrompt !== false;
     config.preset = normalizePreset(settings.footerWessel) ?? "default";
+    activeAuthProfileName = readActiveAuthProfile();
 
     getThinkingLevelFn = typeof ctx.getThinkingLevel === "function"
       ? () => ctx.getThinkingLevel()

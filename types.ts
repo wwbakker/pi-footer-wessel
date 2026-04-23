@@ -7,6 +7,7 @@ export type ColorValue = ThemeColor | `#${string}`;
 export type SemanticColor =
   | "pi"
   | "model"
+  | "authProfile"
   | "path"
   | "gitDirty"
   | "gitClean"
@@ -26,6 +27,7 @@ export type ColorScheme = Partial<Record<SemanticColor, ColorValue>>;
 export type StatusLineSegmentId =
   | "pi"
   | "model"
+  | "auth_profile"
   | "path"
   | "git"
   | "subagents"
@@ -124,6 +126,7 @@ export interface SegmentContext {
   model: { id: string; name?: string; reasoning?: boolean; contextWindow?: number } | undefined;
   thinkingLevel: string;
   sessionId: string | undefined;
+  authProfileName: string | null;
   
   // Computed
   usageStats: UsageStats;

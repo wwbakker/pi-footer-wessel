@@ -4,6 +4,7 @@ import { visibleWidth } from "@mariozechner/pi-tui";
 import type { RenderedSegment, SegmentContext, SemanticColor, StatusLineSegment, StatusLineSegmentId } from "./types.js";
 import { fg, rainbow, applyColor } from "./theme.js";
 import { getIcons, SEP_DOT, getThinkingText } from "./icons.js";
+import { formatAuthProfileName } from "./auth-profile.js";
 
 // Helper to apply semantic color from context
 function color(ctx: SegmentContext, semantic: SemanticColor, text: string): string {
@@ -76,6 +77,19 @@ const modelSegment: StatusLineSegment = {
     }
 
     return { content: color(ctx, "model", content), visible: true };
+  },
+};
+
+const authProfileSegment: StatusLineSegment = {
+  id: "auth_profile",
+  render(ctx) {
+    if (!ctx.authProfileName) {
+      return { content: "", visible: false };
+    }
+
+    const icons = getIcons();
+    const content = withIcon(icons.auth, formatAuthProfileName(ctx.authProfileName));
+    return { content: color(ctx, "authProfile", content), visible: true };
   },
 };
 
@@ -425,6 +439,7 @@ const extensionStatusesSegment: StatusLineSegment = {
 export const SEGMENTS: Record<StatusLineSegmentId, StatusLineSegment> = {
   pi: piSegment,
   model: modelSegment,
+  auth_profile: authProfileSegment,
   path: pathSegment,
   git: gitSegment,
   thinking: thinkingSegment,

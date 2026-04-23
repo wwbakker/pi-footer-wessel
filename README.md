@@ -26,7 +26,7 @@ And removes the rest:
 - Responsive layout with overflow moving into a secondary row
 - Presets for different densities and styles
 - Git integration
-- Model / thinking / context / tokens / cost / time / host / session segments
+- Model / auth profile / thinking / context / tokens / cost / time / host / session segments
 - Extension status passthrough
 - Theme-aware colors with optional local overrides
 
@@ -154,6 +154,7 @@ Example:
   "colors": {
     "pi": "accent",
     "model": "#d787af",
+    "authProfile": "accent",
     "path": "#00afaf",
     "gitClean": "success",
     "gitDirty": "warning",

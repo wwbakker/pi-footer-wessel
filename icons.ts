@@ -1,6 +1,7 @@
 export interface IconSet {
   pi: string;
   model: string;
+  auth: string;
   folder: string;
   branch: string;
   git: string;
@@ -51,6 +52,7 @@ export function getThinkingText(level: string): string | undefined {
 export const NERD_ICONS: IconSet = {
   pi: "\uE22C",         // nf-oct-pi (stylized pi icon)
   model: "\uEC19",      // nf-md-chip (model/AI chip)
+  auth: "\uF2BD",       // nf-fa-user_circle_o
   folder: "\uF115",     // nf-fa-folder_open
   branch: "\uF126",     // nf-fa-code_fork (git branch)
   git: "\uF1D3",        // nf-fa-git (git logo)
@@ -72,6 +74,7 @@ export const NERD_ICONS: IconSet = {
 export const ASCII_ICONS: IconSet = {
   pi: "π",
   model: "◈",
+  auth: "auth",
   folder: "dir",
   branch: "⎇",
   git: "⎇",

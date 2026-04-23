@@ -33,9 +33,8 @@ function ensurePiModuleLinks(): { cleanup: () => void } {
   ];
 
   for (const { link, target } of links) {
-    if (!existsSync(link)) {
-      symlinkSync(target, link);
-    }
+    rmSync(link, { recursive: true, force: true });
+    symlinkSync(target, link);
   }
 
   return {
